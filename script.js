@@ -24,15 +24,17 @@ var b = function(a=6, b=0){
 
 var c = (a=10, b=0)=>{
 	return a+b;
-}
+}*/
 
 
-var f1 = ()=>{
-	alert('f1 calling')
-}
+/*var f1 = ()=>{
+	return "abc";
+}*/
 
-function f2(f)=>{
-	//alert('dbfsdfb');
+/*var f1 = s1=> s1;
+alert(f1('xyz'));*/
+
+/*function f2(f)=>{
 	f();
 }
 
@@ -71,13 +73,13 @@ student.cgpa = 4;*/
 //alert(student2.sname);
 
 
-/*function person(name, age){
+/*function person(name='', age=0){
 	this.name = name;
 	this.age = age;
 }
 
 
-var s1 = new person('alamin', '12');
+var s1 = new person();
 var s2 = new person('xyz', '123');
 var s3 = new person('pgr', '44');
 
@@ -98,9 +100,22 @@ var student = {
 	'cgpa' : 3.5
 }*/
 
-function ajax (){
-	
+
+/*class Student {
+	id = "123";
+	name = 'alamin';
+
+	constructor(id, name){
+		this.id = id;
+		this.name = name;
+	}
+
+	getname(){
+		return this.name;
+	}
 }
 
+const s1 = new Student('22', 'xyz');
+alert(s1.id);*/
 
 
