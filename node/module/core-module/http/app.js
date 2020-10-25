@@ -9,13 +9,17 @@ const server = http.createServer((request, response)=>{
 	//response.end();
 
 	if(request.url == '/'){
-		response.write("this is index page");
+		
+		response.writeHead(200, {'content-type' : 'text/plain'});
+		response.write("<h1>this is index page</h1>");
 		response.end();
 
 	}else if( request.url == '/home'){
-		var content = fs.readFileSync('home.html');
+		/*var content = fs.readFileSync('home.html');
 		response.write(content.toString());
-		response.end();
+		response.end();*/
+
+		fs.createReadStream('home.html').pipe(response);
 	
 	}else{
 		response.write("404 not found!");
