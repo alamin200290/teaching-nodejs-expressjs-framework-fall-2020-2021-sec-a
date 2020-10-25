@@ -1,4 +1,3 @@
-
 const student = require('./student');
 
 const s1 = student();
