@@ -1,24 +1,23 @@
 //declaration
-const express 	= require('express');
-//const ejs		= require('ejs');
-const app 		= express();
+const express 		= require('express');
+const login 		= require('./controllers/login');
+const home 			= require('./controllers/home');
+const logout 		= require('./controllers/logout');
+const app 			= express();
 
 //config
 app.set('view engine', 'ejs');
 
+
 //middleware
+app.use('/login', login);
+app.use('/home', home);
+app.use('/logout', logout);
 
 
 //route
 app.get('/', (request, response)=>{
-	console.log('requested url /');
-	//response.send('home.html', {name: alamin});
-});
-
-app.get('/home', (request, response)=>{
-
-	var user = {name: 'XYZ', id: '12112'};
-	response.render('home/index', user);
+	response.send('This is index page');
 });
 
 
