@@ -11,8 +11,10 @@ router.post('/', (req, res)=>{
 	//console.log(req.body.password);
 
 	if(req.body.username == req.body.password){
-		req.session.uname = req.body.username;
+		//req.session.uname = req.body.username;
+		res.cookie('uname', 'alamin');
 		res.redirect('/home');
+
 	}else{
 		res.redirect('/login');
 	}

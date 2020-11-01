@@ -3,7 +3,8 @@ const router 	= express.Router();
 
 router.get('/', (req, res)=>{
 
-	req.session.uname = "";
+	//req.session.uname = "";
+	res.cookie['username'] = "";
 	res.redirect('/login');
 });
 
