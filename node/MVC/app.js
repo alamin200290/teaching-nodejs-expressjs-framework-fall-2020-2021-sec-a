@@ -3,6 +3,7 @@ const express 			= require('express');
 const bodyParser 		= require('body-parser');
 const exSession 		= require('express-session');
 const cookieParser 		= require('cookie-parser');
+
 const login				= require('./controllers/login');
 const logout			= require('./controllers/logout');
 const home				= require('./controllers/home');
