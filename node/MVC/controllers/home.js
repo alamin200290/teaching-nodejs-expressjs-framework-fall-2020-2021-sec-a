@@ -1,5 +1,5 @@
 const express 	= require('express');
-const mysql 	= require('mysql');
+const userModel = require.main.require('./models/userModel');
 const router 	= express.Router();
 
 router.get('*',  (req, res, next)=>{
@@ -17,29 +17,10 @@ router.get('/', (req, res)=>{
 
 router.get('/userlist', (req, res)=>{
 
-	var connection = mysql.createConnection({
-	  host     : '127.0.0.1',
-	  database : 'node1',
-	  user     : 'root',
-	  password : ''
-	});
-	 
-	connection.connect(function(err) {
-	  if (err) {
-	    console.error('error connecting: ' + err.stack);
-	    return;
-	  }
-	  console.log('connected as id ' + connection.threadId);
-	});
-
-	var sql = "select * from user ";
-	connection.query(sql , function (error, results) {
+	userModel.getAll(function(results){
 		res.render('home/userlist', {users: results});
 	});
-	
-	connection.end(function(err) {
-	  console.log('connection end...');
-	});
+
 })
 
 module.exports = router;
