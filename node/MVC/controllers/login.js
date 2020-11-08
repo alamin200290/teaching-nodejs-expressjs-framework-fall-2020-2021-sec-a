@@ -2,20 +2,14 @@ const express 	= require('express');
 const mysql 	= require('mysql');
 const router 	= express.Router();
 
-
-
-
 router.get('/', (req, res)=>{
 	res.render('login/index');
 });
 
 router.post('/', (req, res)=>{
 
-	//req.body.username 
-	//req.body.password
-
 	var connection = mysql.createConnection({
-	  host     : 'localhost',
+	  host     : '127.0.0.1',
 	  database : 'node1',
 	  user     : 'root',
 	  password : ''
@@ -26,26 +20,27 @@ router.post('/', (req, res)=>{
 	    console.error('error connecting: ' + err.stack);
 	    return;
 	  }
-	 
 	  console.log('connected as id ' + connection.threadId);
 	});
 
+	var sql = "select * from user where username='"+req.body.username+"' and password='"+req.body.password+"'";
 
+	connection.query(sql , function (error, results) {
 
+		//console.log(results.length);
 
-
-	/*if(){
-		
-		res.cookie('uname', 'alamin');
-		res.redirect('/home');
-
-	}else{
-		res.redirect('/login');
-	}*/
+		if(results.length > 0){
+			res.cookie('uname', req.body.username);
+			res.redirect('/home');
+		}else{
+			res.redirect('/login');
+		}
+	});
+	
+	connection.end(function(err) {
+	  console.log('connection end...');
+	});
 }); 
 
 
 module.exports = router;
-
-
-
