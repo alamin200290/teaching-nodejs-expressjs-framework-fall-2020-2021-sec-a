@@ -22,32 +22,60 @@ var getConnection = function(callback){
 }
 
 module.exports = {
-	getResults: function (sql, callback){
+	getResults: function (sql, params, callback){
+		
 		getConnection(function(connection){
-			connection.query(sql , function (error, results) {
-				callback(results);
-			});
-			
-			connection.end(function(err) {
-			  console.log('connection end...');
-			});		
+
+			if(params != null){
+				connection.query(sql, params, function (error, results) {
+					callback(results);
+				});
+				
+				connection.end(function(err) {
+				  console.log('connection end...');
+				});
+
+			}else{
+				connection.query(sql, function (error, results) {
+					callback(results);
+				});
+				
+				connection.end(function(err) {
+				  console.log('connection end...');
+				});
+			}
 		});
 
 	},
-	execute: function (sql, callback){
+	execute: function (sql, params, callback){
 		getConnection(function(connection){
-			connection.query(sql , function (error, status) {
+
+			if(params != null){
+				connection.query(sql, params, function (error, status) {
+					if(status){
+						callback(true);
+					}else{
+						callback(false);
+					}
+				});
 				
-				if(status){
-					callback(true);
-				}else{
-					callback(false);
-				}
-			});
-			
-			connection.end(function(err) {
-			  console.log('connection end...');
-			});		
+				connection.end(function(err) {
+				  console.log('connection end...');
+				});
+			}else{
+				connection.query(sql, function (error, status) {
+					if(status){
+						callback(true);
+					}else{
+						callback(false);
+					}
+				});
+				
+				connection.end(function(err) {
+				  console.log('connection end...');
+				});
+			}
+		
 		});
 	}
 }
