@@ -20,12 +20,17 @@ app.get('/upload', function(req, res){
 
 app.post('/upload', function(req, res){
 	var file = req.files.myfile;
+	
+	console.log(file);
 
-	if(file.mv('/assets/'+file.name)){
-		res.send('success');
-	}else{
-		res.send('error');
-	}
+	file.mv('./assets/'+file.name, function(error){
+		
+		if(error == null){
+			res.send('success');
+		}else{
+			res.send('error');
+		}
+	});
 });
 
 app.listen(3000, function(){
